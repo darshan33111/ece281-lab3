@@ -97,7 +97,7 @@ end thunderbird_fsm;
 architecture thunderbird_fsm_arch of thunderbird_fsm is 
 
 -- CONSTANTS ------------------------------------------------------------------
-    -- create register signals with default state yellow (10)
+    -- create register signals with default state OFF 
         signal f_Q  : STD_LOGIC_VECTOR(7 downto 0):= "10000000";
         signal f_Q_next : STD_LOGIC_VECTOR(7 downto 0):= "10000000";
         
@@ -134,7 +134,7 @@ begin
     register_proc : process (i_clk, i_reset)
     begin
         if i_reset = '1' then
-            f_Q <= "10";        -- reset state is yellow
+            f_Q <= "10000000";        -- reset state is OFF
         elsif (rising_edge(i_clk)) then
             f_Q <= f_Q_next;    -- next state becomes current state
         end if;
