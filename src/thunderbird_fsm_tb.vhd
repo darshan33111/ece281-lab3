@@ -156,10 +156,11 @@ begin
         w_left <= '0';
         
         
-        --Start off with the left indicator being on, but then suddenly turn the right indicator on, which should
+        --Start off with the left indicator being on, but then suddenly turn the right indicator on after 
+        --moving through all states of left and being back to OFF, which should
         -- move it to an ON/blinkers state
         w_left <= '1'; 
-        wait for k_clk_period*1;
+        wait for k_clk_period*4;
             assert w_lights_L = "001" report "Should be just LA" severity failure;
         w_right <= '1'; 
         wait for k_clk_period*1;
