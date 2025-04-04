@@ -160,8 +160,9 @@ begin
         --moving through all states of left and being back to OFF, which should
         -- move it to an ON/blinkers state
         w_left <= '1'; 
-        wait for k_clk_period*4;
+        wait for k_clk_period*1;
             assert w_lights_L = "001" report "Should be just LA" severity failure;
+        wait for k_clk_period*3;
         w_right <= '1'; 
         wait for k_clk_period*1;
              assert w_lights_L = "111" and w_lights_R = "111" report "all lights should be on when L and R on" severity failure;
