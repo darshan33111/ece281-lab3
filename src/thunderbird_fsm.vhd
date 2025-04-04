@@ -101,7 +101,7 @@ architecture thunderbird_fsm_arch of thunderbird_fsm is
         signal f_Q  : STD_LOGIC_VECTOR(7 downto 0):= "10000000";
         signal f_Q_next : STD_LOGIC_VECTOR(7 downto 0):= "10000000";
         
-
+----------------------------------------------------------------
 begin
 
 	-- CONCURRENT STATEMENTS --------------------------------------------------------	
@@ -120,9 +120,9 @@ begin
 	o_lights_L(1) <= f_Q(6) or f_Q(1) or f_Q(0); 
 	o_lights_L(0) <= f_Q(6) or f_Q(2) or f_Q(1) or f_Q(0); 
 	
-	o_lights_R(2) <= f_Q(6) or f_Q(5) or f_Q(4) or f_Q(3); 
+	o_lights_R(0) <= f_Q(6) or f_Q(5) or f_Q(4) or f_Q(3); 
 	o_lights_R(1) <= f_Q(6) or f_Q(4) or f_Q(3); 
-	o_lights_R(0) <= f_Q(6) or f_Q(3); 
+	o_lights_R(2) <= f_Q(6) or f_Q(3); 
 	
 	
 	
@@ -140,5 +140,5 @@ begin
         end if;
     end process register_proc;	
 				   
-				  
+	----------------------------------------------------------------			  
 end thunderbird_fsm_arch;
