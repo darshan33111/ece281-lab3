@@ -8,5 +8,6 @@ Built for Vivado 2024.2 on Windows 11.
 
 Video Link: https://drive.google.com/file/d/1wPCmCwKk2goYimf42SNXXbUcUJhecyjB/view?usp=sharing
 
-Waveform Image: ![Waveform from thunderbird_fsm_tb]({38EAD56F-6E71-46E1-B383-362426FC0BB5}.png)
+Waveform Image: <img width="564" alt="{C84ABBED-9FAF-46E7-858D-09594F5E9395}" src="https://github.com/user-attachments/assets/c418ed1e-9e76-40ef-9e2c-3d9462508972" />
+
 
