@@ -116,7 +116,9 @@ begin
 		
 		-- The left and the right turn signals are on, which means that it should move to ON(all lights on) state and 
 		-- then back to OFF, on repeat until left and right signals are turned off
-		w_left <= '1'; w_right <= '1'; wait for k_clk_period;
+		w_left <= '1'; 
+		w_right <= '1'; 
+		wait for k_clk_period*1;
           assert w_lights_L = "111" and w_lights_R = "111" report "all lights should be on when L and R on" severity failure;
         wait for k_clk_period*1;
           assert w_lights_L = "000" and w_lights_R = "000" report "should be transitioning to off state" severity failure;
@@ -124,8 +126,46 @@ begin
           assert w_lights_L = "111" and w_lights_R = "111" report "all lights should be on when L and R on" severity failure;
         wait for k_clk_period*1;
           assert w_lights_L = "000" and w_lights_R = "000" report "should be transitioning to off state" severity failure;
-        w_left <= '1'; w_right <= '1';
+        w_left <= '0'; 
+        w_right <= '0';
         
+        --Upon just the right indicator being on, it should cycle through the states from just being RA on,
+        -- to all three rights on to back to off
+        w_right <= '1'; 
+        wait for k_clk_period*1;
+            assert w_lights_R = "001" report "Should be just RA" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_R = "011" report "Should be just RA and RB" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_R = "111" report "Should be all reds on" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_R = "000" report "Should be back to off" severity failure;
+        w_right <= '0';
+        
+        --Upon just the left indicator being on, it should cycle through the states from just being LA on,
+        -- to all three lefts on to back to off
+        w_left <= '1'; 
+        wait for k_clk_period*1;
+            assert w_lights_L = "001" report "Should be just LA" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_L = "011" report "Should be just LA and LB" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_L = "111" report "Should be all lefts on" severity failure;
+        wait for k_clk_period*1;
+            assert w_lights_L = "000" report "Should be back to off" severity failure;
+        w_left <= '0';
+        
+        
+        --Start off with the left indicator being on, but then suddenly turn the right indicator on, which should
+        -- move it to an ON/blinkers state
+        w_left <= '1'; 
+        wait for k_clk_period*1;
+            assert w_lights_L = "001" report "Should be just LA" severity failure;
+        w_right <= '1'; 
+        wait for k_clk_period*1;
+             assert w_lights_L = "111" and w_lights_R = "111" report "all lights should be on when L and R on" severity failure;
+        w_left <= '0'; 
+        w_right <= '0';     
 		wait;
 	end process;
 	----------------------------------------------------------------
